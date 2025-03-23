@@ -14,6 +14,21 @@ describe('POC using supertest', () => {
         const response = await request
             .get('/comments')
             .query({ postId: 1, limit: 10 });
-        console.log(response);
+        console.log(response.body);
+        expect(response.statusCode).toBe(200);
+    })
+
+    it.only('POST request', async () => {
+        const payload = {
+            title: "Demo title",
+            body: "Demo body",
+            userId: 1
+        }
+        const response = await request
+            .post('/posts')
+            .send(payload);
+        console.log(response.body);
+        expect(response.statusCode).toBe(201);
+        expect(response.body.title).toBe(payload.title);
     })
 })
