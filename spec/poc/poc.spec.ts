@@ -49,7 +49,7 @@ describe('POC using supertest', () => {
         expect(response.body.title).not.toBe(beforeTitle);
     })
 
-    it.only('PATCH request', async () => {
+    it('PATCH request', async () => {
         const payload = {
             title: "Demo title updated",
         }
@@ -62,5 +62,11 @@ describe('POC using supertest', () => {
         expect(response.statusCode).toBe(200);
         expect(response.body.title).toBe(payload.title);
         expect(response.body.title).not.toBe(beforeTitle);
+    })
+
+    it.only('DELETE request', async () => {
+        const response = await request.delete('/posts/1');
+        console.log(response.body);
+        expect(response.statusCode).toBe(200);
     })
 })
