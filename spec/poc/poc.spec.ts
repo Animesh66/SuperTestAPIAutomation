@@ -13,7 +13,7 @@ describe('POC using supertest', () => {
     it('GET request query param', async () => {
         const response = await request
             .get('/comments')
-            .query({ postId: 1 });
+            .query({ postId: 1, limit: 10 });
         console.log(response);
     })
 })
