@@ -32,7 +32,7 @@ describe('POC using supertest', () => {
         expect(response.body.title).toBe(payload.title);
     })
 
-    it.only('PUT request', async () => {
+    it('PUT request', async () => {
         const payload = {
             title: "Demo title updated",
             body: "Demo body updated",
@@ -42,6 +42,21 @@ describe('POC using supertest', () => {
         const beforeTitle = getResponse.body.title
         const response = await request
             .put('/posts/1')
+            .send(payload);
+        console.log(response.body);
+        expect(response.statusCode).toBe(200);
+        expect(response.body.title).toBe(payload.title);
+        expect(response.body.title).not.toBe(beforeTitle);
+    })
+
+    it.only('PATCH request', async () => {
+        const payload = {
+            title: "Demo title updated",
+        }
+        const getResponse = await request.get('/posts/1');
+        const beforeTitle = getResponse.body.title
+        const response = await request
+            .patch('/posts/1')
             .send(payload);
         console.log(response.body);
         expect(response.statusCode).toBe(200);
